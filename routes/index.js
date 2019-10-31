@@ -31,8 +31,20 @@ router.get('/:id', (req, res) => {
 
         console.log(result); // should see objects wrapped in an array
 
+        // convert socila prop into array
+        // before it goes through
+        //map is an array that lets you map one value to another
+        result[0].social = result[0].social.split(",").map(function(item) {
+            item = item.trim();
+            //item.trim() removes any empty white space from text
+
+            return item;
+        })
+
+        console.log("after trim / conversion:", result[0]);
+
         // render the home view with dynamic data
-        //res.render('home', { data: result });
+        res.json(result[0]);
     })
 })
 
